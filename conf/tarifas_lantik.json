@@ -1,0 +1,201 @@
+{
+  "catalogo": "Tarifas Corporativas LANTIK",
+  "version": "1.0-corporativo",
+  "fuente": "Documento Parametros Estimacion (corporativo), validado por el equipo PM",
+  "fecha_captura": "2026-07-15",
+  "validez": "Desde julio 2026 hasta nueva revision",
+  "notas": "Derivado de knowledge/estimation/tarifas-corporativas.yaml. Reemplaza las tarifas demo. Toda estimacion debe usar exclusivamente las unidades de este catalogo.",
+
+  "fases": {
+    "FN1": {
+      "nombre": "Analisis de requisitos y alineacion funcional-tecnica",
+      "tipo": "analisis",
+      "computa_en_base_transversal": false,
+      "estimacion": "Juicio experto (horas fijas justificadas), no volumetrica"
+    },
+    "FN2": {
+      "nombre": "Staging - Extraccion de datos",
+      "tipo": "tecnica",
+      "computa_en_base_transversal": true
+    },
+    "FN3": {
+      "nombre": "ETL - Integracion y transformacion (DataStore + Dimensional)",
+      "tipo": "tecnica",
+      "computa_en_base_transversal": true
+    },
+    "FN4": {
+      "nombre": "Visualizacion - Cognos / Power BI",
+      "tipo": "tecnica",
+      "computa_en_base_transversal": true
+    },
+    "FN5": {
+      "nombre": "Transversal - Pruebas, ajustes post-pruebas, seguimiento y coordinacion",
+      "tipo": "transversal",
+      "calculo": "10% sobre la base tecnica (FN2 + FN3 + FN4), redondeado a 1 decimal. FN1 (analisis) queda excluido de la base."
+    }
+  },
+
+  "tarifas": {
+    "extraccion": {
+      "tabla_estandar": {
+        "descripcion": "Extraccion de tabla SQL Server estandar (sin reglas complejas de conexion)",
+        "horas": 5,
+        "fase": "FN2"
+      },
+      "fichero_estandar": {
+        "descripcion": "Extraccion de fichero plano (CSV/Excel) con estructura estable",
+        "horas": 4,
+        "fase": "FN2"
+      },
+      "extraccion_complicada": {
+        "descripcion": "Extraccion compleja: multiples origenes, transformaciones previas, validaciones",
+        "horas": 21,
+        "fase": "FN2"
+      },
+      "incremental_cdc": {
+        "descripcion": "Extraccion incremental mediante CDC (Change Data Capture)",
+        "horas": 7,
+        "fase": "FN2",
+        "notas": "Mas eficiente que full load para volumenes grandes"
+      }
+    },
+
+    "etl": {
+      "ssis_flujo_facil": {
+        "descripcion": "Clonar flujo de datos SSIS existente con cambios minimos (parametros)",
+        "horas": 4,
+        "fase": "FN3",
+        "notas": "Aplicable cuando existe paquete similar en proyecto de la misma aplicacion"
+      },
+      "ssis_flujo_medio": {
+        "descripcion": "Crear/modificar flujo SSIS con logica estandar de transformacion",
+        "horas": 12,
+        "fase": "FN3",
+        "notas": "Incluye diseno, componentes, mappeos, validacion en Staging"
+      },
+      "ssis_flujo_dificil": {
+        "descripcion": "Crear flujo SSIS con logica compleja: multiples transformaciones, expresiones, condicionales",
+        "horas": 24,
+        "fase": "FN3",
+        "notas": "Requiere conocimiento avanzado de SSIS"
+      },
+      "maestro_estandar": {
+        "descripcion": "Crear/modificar tabla maestra simple (catalogo de referencia)",
+        "horas": 4,
+        "fase": "FN3",
+        "notas": "Estructura basica, sin logica transaccional"
+      },
+      "maestro_con_integridades": {
+        "descripcion": "Crear/modificar tabla maestra con controles de integridad referencial",
+        "horas": 6,
+        "fase": "FN3",
+        "notas": "Incluye claves subrogadas, restricciones UNIQUE, auditoria"
+      },
+      "maestro_ds": {
+        "descripcion": "Crear/modificar maestro DS (Data Store integrado con reglas de negocio)",
+        "horas": 20,
+        "fase": "FN3",
+        "notas": "Incluye joins, calculos, control de historico"
+      },
+      "datastore_datamart_muy_facil": {
+        "descripcion": "Crear DataStore/DataMart muy simple (copia con limpieza minima)",
+        "horas": 40,
+        "fase": "FN3",
+        "notas": "1-2 tablas origen, sin cruces complejos. Bloque unificado: incluye Normalizado + Dimensional"
+      },
+      "datastore_datamart_facil": {
+        "descripcion": "Crear DataStore/DataMart simple (integracion basica de 2-3 tablas)",
+        "horas": 60,
+        "fase": "FN3",
+        "notas": "JOINs simples, calculos directos, sin SCD"
+      },
+      "datastore_datamart_medio": {
+        "descripcion": "Crear DataStore/DataMart estandar (integracion multiple, reglas de negocio)",
+        "horas": 80,
+        "fase": "FN3",
+        "notas": "4-6 tablas, cruces con dimensiones, logica de calculo media, SCD Tipo 1"
+      },
+      "datastore_datamart_complicado": {
+        "descripcion": "Crear DataStore/DataMart complejo (multiples fuentes, reglas transaccionales, historico)",
+        "horas": 120,
+        "fase": "FN3",
+        "notas": "7+ tablas, SCD Tipo 2, validaciones complejas, auditoria"
+      },
+      "vista_para_informes": {
+        "descripcion": "Crear vista indexada para optimizar queries de reporting",
+        "horas": 10,
+        "fase": "FN3",
+        "notas": "Incluye diseno de indices, testing de rendimiento, documentacion"
+      }
+    },
+
+    "visualizacion_power_bi": {
+      "pbi_menu": {
+        "descripcion": "Crear menu/navegacion en Power BI (botones, slicers de navegacion)",
+        "horas": 8,
+        "fase": "FN4"
+      },
+      "pbi_pestana_simple": {
+        "descripcion": "Crear pestana/pagina simple en Power BI (1-2 visuales basicos)",
+        "horas": 24,
+        "fase": "FN4",
+        "notas": "Diseno + construccion, sin interactividad compleja"
+      },
+      "pbi_pestana_estandar": {
+        "descripcion": "Crear pestana estandar en Power BI (3-5 visuales, filtros, drill-down)",
+        "horas": 40,
+        "fase": "FN4",
+        "notas": "Diseno + construccion, incluye validacion y ajustes de rendimiento"
+      },
+      "pbi_pestana_compleja": {
+        "descripcion": "Crear pestana compleja en Power BI (6+ visuales, medidas DAX complejas, interactividad avanzada)",
+        "horas": 64,
+        "fase": "FN4",
+        "notas": "Requiere expertise en DAX, optimizacion de modelos"
+      }
+    },
+
+    "visualizacion_cognos": {
+      "capa_fisica_cognos": {
+        "descripcion": "Modificar capa fisica Cognos (actualizar relaciones, entidades, claves)",
+        "horas": 4,
+        "fase": "FN4",
+        "notas": "En Framework Manager: tabla por tabla"
+      },
+      "campo_cognos": {
+        "descripcion": "Exponer un campo en capas logica/presentacion de Cognos",
+        "horas": 0.25,
+        "fase": "FN4",
+        "notas": "Renombrado, formato, jerarquia (si aplica)"
+      },
+      "vista_indexada_cognos": {
+        "descripcion": "Crear vista indizada para optimizar consultas de reporting en Cognos",
+        "horas": 5,
+        "fase": "FN4",
+        "notas": "Mas ligero que vistas en SQL; para agregaciones"
+      }
+    }
+  },
+
+  "reglas": {
+    "transversal_fn5": {
+      "descripcion": "Pruebas y validacion + ajustes post-pruebas + seguimiento y coordinacion",
+      "porcentaje": 0.10,
+      "base": "FN2 + FN3 + FN4",
+      "excluye": "FN1 (bloques de tipo analisis)",
+      "redondeo": "1 decimal"
+    }
+  },
+
+  "roles": {
+    "JP": "Jefatura de Proyecto (gestion, coordinacion, seguimiento)",
+    "AN": "Analisis de Negocio (requisitos, validacion funcional)",
+    "DT": "Diseno Tecnico (arquitectura, SQL, procedimientos)",
+    "PR": "Programacion (SSIS, desarrollo, testing tecnico)"
+  },
+
+  "reparto_por_defecto": {
+    "fases_tecnicas_y_transversal": { "JP": 0.10, "AN": 0.30, "DT": 0.35, "PR": 0.25 },
+    "fase_analisis_FN1": { "JP": 0.10, "AN": 0.50, "DT": 0.30, "PR": 0.10 }
+  }
+}
