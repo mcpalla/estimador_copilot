@@ -81,14 +81,7 @@ En [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com):
 3. Activa **Usar solo fuentes especificadas**
 4. Guarda y espera el reindexado (1-2 minutos)
 
-**Opción B: Subir archivos locales**
 
-1. Pestaña **Conocimiento** → **+ Agregar conocimiento** → **Archivos**
-2. Sube los tres archivos de la carpeta `conf/`:
-   - `tarifas_lantik.json`
-   - `catalogo_patrones.md`
-   - `glosario_y_reglas.md`
-3. Espera a que aparezca **Listo**
 
 **En cualquier caso:**
 - Verifica que el conocimiento cargado está **activo**
