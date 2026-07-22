@@ -95,7 +95,15 @@ En [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com):
 - La opción de "información pública de la web" debe estar **desactivada**
 
 
-### 4. Publicar
+### 4. Probar
+
+La carpeta test/ contiene peticiones de ejemplo para validar el comportamiento del agente.
+
+Estos casos también sirven para validar que el agente mantiene la coherencia después de actualizaciones en tarifas, patrones o instrucciones.
+
+
+
+### 5. Publicar
 
 Cuando el comportamiento sea correcto:
 1. **Publicar**
