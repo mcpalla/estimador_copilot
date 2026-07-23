@@ -110,11 +110,13 @@ Cuando el comportamiento sea correcto:
 
 ### Fase 2 (H3 2026): Exportación en YAML & API REST
 
-El agente generará resultados también en **YAML con frontmatter**, compatible con scripts de automatización. Permite guardar expedientes de forma estructurada sin reescribir.
+El agente generará resultados en **YAML con frontmatter** para su integración directa en flujos de datos automatizados:
 
-Crear un estimador en forma de script de Python cuya función es generar el MS Excel a partir de la información contenida en el output del estimador.
+- Persistencia estructurada: Recepción vía API HTTP local y almacenamiento directo de expedientes en dossiers/ en formato .md.
 
-Publicar el estimador como **servicio web**: consumible desde portales PM, sistemas de integración y aplicaciones externas. Abre la puerta a automatización profunda.
+- Procesamiento downstream: Ingesta de expedientes mediante scripts de Python (generar_excel.py) para traducir los metadatos a hojas de cálculo finales.
+
+- Reporiting dinámico: Generación de archivos Excel con fórmulas vivas, preservando la recálculo automático sin depender de valores estáticos.
 
 
 
